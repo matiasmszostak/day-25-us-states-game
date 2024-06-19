@@ -29,34 +29,12 @@ data = pandas.read_csv("50_states.csv")
 data_df = pandas.DataFrame(data)
 print(data_df)
 
-states_list = data["state"].tolist()
-print(states_list)
-
-x_list = data["x"].tolist()
-y_list = data["y"].tolist()
-
-location_list = []
-
-iteration = 0
-
-for x in x_list:
-    location_list.append((x, y_list[iteration]))
-    iteration += 1
-print(location_list)
-
-
-
+states_list = data["state"].to_list()
 
 correct_answers = 0
 
 
-data_dict = {
-    "State": states_list,
-    "Location": location_list
-}
 
-df = pandas.DataFrame(data_dict)
-print(df)
 
 
 FONT = ("Arial", 8, "bold")
@@ -88,10 +66,8 @@ while game_is_on:
     print(answer_state)
 
     if answer_state in states_list:
-        print("correcto")
         states_list.remove(answer_state)
         correct_answers += 1
-        print(states_list)
 
         state_location_x = data_df.loc[data_df["state"] == answer_state, "x"].values[0]
         state_location_y = data_df.loc[data_df["state"] == answer_state, "y"].values[0]
