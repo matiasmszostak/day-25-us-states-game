@@ -26,8 +26,6 @@ t.shape(IMAGE)
 
 data = pandas.read_csv("50_states.csv")
 
-# data_df = pandas.DataFrame(data)
-# print(data_df)
 
 states_list = data["state"].to_list()
 
@@ -68,20 +66,17 @@ while game_is_on:
     if answer_state in states_list:
         states_list.remove(answer_state)
         correct_answers += 1
-        #
-        # # If the state is the same as the answer, I grab the x and y positions and create a Tupple with them
-        # # .loc is a method that takes a row and a column as parameters to get this data from the Data Frame
-        # # values[0] gives me the content of the Series as a String
-        # state_location_x = data_df.loc[data_df["state"] == answer_state, "x"].values[0]
-        # state_location_y = data_df.loc[data_df["state"] == answer_state, "y"].values[0]
-        # location_position = (state_location_x, state_location_y)
 
 
         state_data = data[data.state == answer_state]
-        location_position = (state_data.x, state_data.y)
+        location_position = (int(state_data.x.iloc[0]), int(state_data.y.iloc[0]))
 
 
         write_state(location_position, answer_state)
+
+        #TODO: Test this code
+        if len(states_list) == 0:
+            game_is_on = False
 
 
 
